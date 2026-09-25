@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Demo — ぽんぽこカート</title>
+<link rel="icon" href="data:,">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #151212; }
+  /* Fake "3D" backdrops — stand-ins for the WebGL scene that renders behind the UI. */
+  #bg { position: fixed; inset: 0; overflow: hidden; }
+  #bg > * { position: absolute; }
+  .sky-day { inset: 0; background: linear-gradient(180deg, #5fb4f0 0%, #a9dcf7 38%, #f6ead0 62%, #f3d6a8 70%); }
+  .sky-sunset { inset: 0; background: linear-gradient(180deg, #3b3a78 0%, #a24a6e 30%, #f0874a 52%, #ffc56e 62%, #f7a54b 68%); }
+  .sky-studio { inset: 0; background: radial-gradient(ellipse 45% 55% at 55% 50%, #4a5c96 0%, #243a6b 40%, #0f1630 100%); }
+  .sky-night { inset: 0; background: linear-gradient(180deg, #0e1433 0%, #1d2658 45%, #4a2e62 70%); }
+  .sun { width: 26vmin; height: 26vmin; border-radius: 50%; background: radial-gradient(circle, #fff6d6 0 40%, rgba(255, 220, 150, .5) 55%, rgba(255, 200, 120, 0) 70%); filter: blur(2px); }
+  .mount { left: -10%; right: -10%; height: 40%; bottom: 30%; background: #6f86b0; clip-path: polygon(0 100%, 0 60%, 10% 35%, 18% 55%, 30% 20%, 42% 50%, 52% 30%, 63% 58%, 75% 25%, 86% 52%, 100% 38%, 100% 100%); filter: blur(1.5px); opacity: .85; }
+  .hill { left: -10%; right: -10%; height: 36%; bottom: 0; background: linear-gradient(180deg, #7fb45a, #4d8a3a); clip-path: ellipse(70% 100% at 40% 100%); filter: blur(1px); }
+  .hill2 { left: 20%; right: -20%; height: 30%; bottom: 0; background: linear-gradient(180deg, #92c465, #5e9a44); clip-path: ellipse(60% 100% at 70% 100%); }
+  .blossom { border-radius: 50%; background: radial-gradient(circle at 40% 35%, #ffe3ea, #f4a7b9 55%, #d9738e); filter: blur(3px); opacity: .95; }
+  .trunk { width: 1.4vmin; background: #5a3a2a; filter: blur(1px); }
+  .floor { left: 50%; top: 50%; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(ellipse, rgba(255, 220, 150, .35), rgba(255, 220, 150, 0) 70%); }
+  .ring { border-radius: 50%; border: .6vmin solid rgba(248, 221, 140, .7); box-shadow: 0 0 3vmin rgba(248, 221, 140, .5); transform: translate(-50%, -50%) scaleY(.32); }
+  .kart { transform: translate(-50%, -50%); border-radius: 30% 30% 22% 22%; background: linear-gradient(180deg, #ff9c4a, #e0662a 60%, #8a3a14); box-shadow: 0 2vmin 3vmin rgba(0, 0, 0, .5); }
+  .kart::before, .kart::after { content: ''; position: absolute; bottom: -18%; width: 24%; height: 38%; border-radius: 30%; background: #222; }
+  .kart::before { left: -6%; } .kart::after { right: -6%; }
+  .kart .head { position: absolute; left: 50%; top: -62%; width: 46%; height: 78%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle at 40% 35%, #c9a88a, #8f7760 70%); }
+  .bokeh { border-radius: 50%; background: rgba(255, 230, 170, .22); filter: blur(4px); }
+  .road { left: 0; right: 0; bottom: 0; height: 58%; background: linear-gradient(180deg, #6d6a66, #4a4745); clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%); }
+  .grass { left: 0; right: 0; bottom: 0; height: 58%; background: linear-gradient(180deg, #8fc46a, #4f8f3c); }
+  .line { left: 50%; bottom: 0; width: .8%; height: 58%; transform: translateX(-50%); background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .85) 0 6%, transparent 6% 12%); clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%); }
+  .paddy { left: -5%; right: -5%; bottom: 0; height: 34%; background: repeating-linear-gradient(176deg, #b9a03a 0 3%, #d8c05a 3% 5%, #8a9a33 5% 8%); filter: blur(1px); }
+  .lantern { width: 3vmin; height: 4vmin; border-radius: 45%; background: radial-gradient(circle, #ffd28a, #e8431f 60%); box-shadow: 0 0 3vmin #ff9a50; }
+  #dbg { position: fixed; border: 2px dashed #0ff; pointer-events: none; z-index: 999; }
+  #dbg::after { content: 'preview rect'; position: absolute; left: 4px; top: 2px; color: #0ff; font: 12px monospace; }
+</style>
+</head>
+<body>
+<div id="bg"></div>
+<script type="module" src="./ui-demo.js"></script>
+</body>
+</html>

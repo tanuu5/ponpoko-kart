@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Model Preview</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+  #labels { position: fixed; inset: 0; pointer-events: none; }
+  #labels div { position: absolute; color: #fff; font: 600 13px/1.2 system-ui, sans-serif; text-shadow: 0 1px 3px #000, 0 0 2px #000; transform: translate(-50%, 0); white-space: nowrap; }
+  #err { position: fixed; left: 8px; top: 8px; color: #f66; font: 13px monospace; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<div id="labels"></div>
+<div id="err"></div>
+<script type="module" src="./preview.js"></script>
+</body>
+</html>

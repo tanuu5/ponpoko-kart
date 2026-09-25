@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio Test — ぽんぽこカート</title>
+<style>
+  :root { --bg: #1d1b22; --panel: #2a2731; --fg: #efe9e1; --dim: #a9a2b3; --acc: #e8814d; --ok: #7fc98f; --bad: #ef6b6b; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, 'Hiragino Sans', sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 20px; margin: 0 0 8px; }
+  h2 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin: 18px 0 6px; }
+  section { background: var(--panel); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; }
+  button { background: #3a3544; color: var(--fg); border: 1px solid #4a4456; border-radius: 6px; padding: 5px 9px; margin: 2px; cursor: pointer; font: inherit; }
+  button:hover { border-color: var(--acc); }
+  button.on { background: var(--acc); color: #221; }
+  label { display: inline-flex; align-items: center; gap: 6px; margin: 2px 12px 2px 0; color: var(--dim); }
+  input[type=range] { width: 140px; }
+  #status { color: var(--dim); margin-left: 8px; }
+  pre { background: #15131a; padding: 8px; border-radius: 6px; overflow: auto; max-height: 520px; font-size: 12px; }
+  table { border-collapse: collapse; font-size: 12px; width: 100%; }
+  td, th { padding: 2px 6px; border-bottom: 1px solid #3a3544; text-align: right; }
+  td:first-child, th:first-child { text-align: left; }
+  .bad { color: var(--bad); } .ok { color: var(--ok); }
+</style>
+</head>
+<body>
+<main>
+  <h1>ぽんぽこカート — audio test <span id="status">(click “Unlock” first)</span></h1>
+  <section>
+    <button id="unlock">Unlock audio</button>
+    <label>master <input id="vMaster" type="range" min="0" max="1" step="0.01" value="0.9"></label>
+    <label>music <input id="vMusic" type="range" min="0" max="1" step="0.01" value="0.55"></label>
+    <label>sfx <input id="vSfx" type="range" min="0" max="1" step="0.01" value="0.8"></label>
+  </section>
+  <h2>Music</h2>
+  <section id="music"></section>
+  <h2>Jingles</h2>
+  <section id="jingles"></section>
+  <h2>Ambience</h2>
+  <section id="amb"></section>
+  <h2>SFX</h2>
+  <section>
+    <label>pan <input id="sPan" type="range" min="-1" max="1" step="0.01" value="0"></label>
+    <label>pitch <input id="sPitch" type="range" min="0.5" max="2" step="0.01" value="1"></label>
+    <label>volume <input id="sVol" type="range" min="0" max="1" step="0.01" value="1"></label>
+    <div id="sfx"></div>
+  </section>
+  <h2>Loops</h2>
+  <section>
+    <div id="loops"></div>
+    <label>volume <input id="lVol" type="range" min="0" max="1.5" step="0.01" value="1"></label>
+    <label>pan <input id="lPan" type="range" min="-1" max="1" step="0.01" value="0"></label>
+    <label>rate <input id="lRate" type="range" min="0.3" max="2" step="0.01" value="1"></label>
+  </section>
+  <h2>Engine / drift</h2>
+  <section>
+    <button id="engOn">engineStart</button><button id="engOff">engineStop</button>
+    <label>speed01 <input id="eSpeed" type="range" min="0" max="1.6" step="0.01" value="0"></label>
+    <label>throttle <input id="eThr" type="range" min="0" max="1" step="0.01" value="0"></label>
+    <label><input id="eBoost" type="checkbox"> boost</label>
+    <label><input id="eAir" type="checkbox"> airborne</label>
+    <label><input id="eOff" type="checkbox"> offroad</label>
+    <br>
+    <label><input id="dOn" type="checkbox"> drift</label>
+    <label>level <input id="dLvl" type="range" min="0" max="3" step="1" value="0"></label>
+  </section>
+  <h2>Self-test (offline render)</h2>
+  <section>
+    <button id="runTest">Run self-test</button>
+    <span id="testStatus"></span>
+    <div id="results"></div>
+  </section>
+</main>
+<script type="module" src="./audio-test.js"></script>
+</body>
+</html>
